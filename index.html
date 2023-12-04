@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emissão de Nota Fiscal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emissão de Nota Fiscal de Serviço</h1>
+
+    <form id="notaFiscalForm">
+        <label for="campoCliente">Nome do Cliente:</label>
+        <input type="text" id="campoCliente" required><br>
+
+        <label for="campoServico">Valor do Serviço R$:</label>
+        <input type="number" id="campoServico" required><br>
+
+        <label for="campoCPF">Insira seu CPF</label>
+        <input type="number" id="campoCPF" required><br>
+
+        <button type="button" onclick="calcularNotaFiscal()">Emitir Nota Fiscal</button>
+    </form>
+
+    <div id="notaFiscal" style="display: none; margin-top: 20px;">
+        <h2>Nota Fiscal</h2>
+        <p><strong>Cliente:</strong> <span id="clienteNome"></span></p>
+        <p><strong>Valor do Serviço:</strong> R$ <span id="valorDoServico"></span></p>
+        <p><strong>Imposto (10%):</strong> R$ <span id="imposto"></span></p>
+        <p><strong>Total:</strong> R$ <span id="total"></span></p>
+    </div>
+
+    <script>
+        function calcularNotaFiscal() {
+
+            var nomeCliente = document.getElementById('campoCliente').value;
+            var valorServico = parseFloat(document.getElementById('campoServico').value);
+            var campoCPF = document.getElementById('campoCPF').value;
+
+            var imposto = 0.10 * valorServico;
+
+            var total = valorServico + imposto;
+
+            document.getElementById('clienteNome').textContent = nomeCliente;
+            document.getElementById('valorDoServico').textContent = valorServico.toFixed(2);
+            document.getElementById('imposto').textContent = imposto.toFixed(2);
+            document.getElementById('total').textContent = total.toFixed(2);
+
+            document.getElementById('notaFiscal').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
